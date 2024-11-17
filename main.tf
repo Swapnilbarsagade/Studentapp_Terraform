@@ -90,6 +90,7 @@ resource "aws_instance" "web" {
 
               # Copy the student.war file to the Tomcat webapps directory
               cp /tmp/aws/tomcat9sstudent/student.war /opt/tomcat/webapps/
+              cp /tmp/aws/tomcat9sstudent/mysql-connector.jar /opt/tomcat/lib/
               # Copy the student.war file to the Tomcat webapps directory as ROOT.war
               #cp /tmp/aws/tomcat9sstudent/student.war /opt/tomcat/webapps/ROOT.war
 
