@@ -1,3 +1,55 @@
+# RDS database connection    ------------------>
+
+# Security group for RDS
+resource "aws_security_group" "rds_sg" {
+  name        = "rds-security-group"
+  description = "Security group for the RDS instance"
+  vpc_id      = var.vpc_id
+
+  # Inbound rules to allow connections from the web server
+  ingress {
+    description      = "Allow MySQL/MariaDB traffic from web server"
+    from_port        = 3306
+    to_port          = 3306
+    protocol         = "tcp"
+    security_groups  = [aws_security_group.this_student_sg.id]
+  }
+
+  # Outbound rules
+  egress {
+    description      = "Allow all outbound traffic"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "rds-sg"
+  }
+}
+
+# RDS MariaDB instance
+resource "aws_db_instance" "mariadb" {
+  allocated_storage    = 20
+  engine               = "mariadb"
+  engine_version       = "10.6"
+  instance_class       = "db.t3.micro"
+  name                 = "studentdb"
+  username             = "admin"
+  password             = "yoursecurepassword" # Replace with a secure password
+  publicly_accessible  = false
+  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+  db_subnet_group_name = var.db_subnet_group_name # Replace with your DB subnet group name
+  skip_final_snapshot  = true
+
+  tags = {
+    Name = "StudentAppDB"
+  }
+}
+
+# student app frontend webserver ------------------------>
+
 resource "aws_security_group" "this_student_sg" {
   name        = "student-security-group"
   description = "Security group for my StudentApp"
@@ -71,6 +123,9 @@ resource "aws_instance" "web" {
               # Install Java (required for Tomcat)
               apt-get install -y openjdk-11-jdk
 
+              # Install MySQL client
+              apt-get install -y mariadb-client
+
               # Set JAVA_HOME
               echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> /etc/profile.d/java.sh
               source /etc/profile.d/java.sh
@@ -91,6 +146,13 @@ resource "aws_instance" "web" {
               # Copy the student.war file to the Tomcat webapps directory and mysql-connector.jar to lib directory
               cp /tmp/aws/tomcat9sstudent/student.war /opt/tomcat/webapps/
               cp /tmp/aws/tomcat9sstudent/mysql-connector.jar /opt/tomcat/lib/
+
+              # Configure database connection (environment variables for database details)
+              echo "DB_HOST=${aws_db_instance.mariadb.endpoint}" >> /etc/environment
+              echo "DB_USER=admin" >> /etc/environment
+              echo "DB_PASS=yoursecurepassword" >> /etc/environment
+              echo "DB_NAME=studentdb" >> /etc/environment
+              source /etc/environment
 
               # Start Tomcat using catalina.sh
               /opt/tomcat/bin/catalina.sh stop
