@@ -67,3 +67,9 @@ variable "subdomain" {
   type        = string
   default     = "student.swapnilbdevops.online"  # Example subdomain (e.g., 'todo.example.com')
 }
+
+# RDS variable--->
+
+variable "db_subnet_group_name" {
+  description = "Name of the DB subnet group"
+}
