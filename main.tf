@@ -88,12 +88,9 @@ resource "aws_instance" "web" {
               # Clone the Git repository that contains the student.war file
               git clone https://github.com/Swapnilbarsagade/AWS.git /tmp/aws
 
-              # Copy the student.war file to the Tomcat webapps directory
+              # Copy the student.war file to the Tomcat webapps directory and mysql-connector.jar to lib directory
               cp /tmp/aws/tomcat9sstudent/student.war /opt/tomcat/webapps/
               cp /tmp/aws/tomcat9sstudent/mysql-connector.jar /opt/tomcat/lib/
-              # Copy the student.war file to the Tomcat webapps directory as ROOT.war
-              #cp /tmp/aws/tomcat9sstudent/student.war /opt/tomcat/webapps/ROOT.war
-
 
               # Start Tomcat using catalina.sh
               /opt/tomcat/bin/catalina.sh stop
