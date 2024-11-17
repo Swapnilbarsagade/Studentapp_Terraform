@@ -35,7 +35,6 @@ resource "aws_db_instance" "mariadb" {
   engine               = "mariadb"
   engine_version       = "10.6"
   instance_class       = "db.t3.micro"
-  name                 = "studentdb"
   username             = "admin"
   password             = "yoursecurepassword" # Replace with a secure password
   publicly_accessible  = false
