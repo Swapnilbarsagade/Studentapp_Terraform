@@ -29,17 +29,28 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
+# DB Subnet Group
+resource "aws_db_subnet_group" "rds_subnet_group" {
+  name       = "rds-subnet-group"
+  subnet_ids = var.subnet_ids  # Replace with your subnet IDs
+
+  tags = {
+    Name = "rds-subnet-group"
+  }
+}
+
 # RDS MariaDB instance
 resource "aws_db_instance" "mariadb" {
   allocated_storage    = 20
   engine               = "mariadb"
   engine_version       = "10.6"
   instance_class       = "db.t3.micro"
-  username             = "admin"
-  password             = "yoursecurepassword" # Replace with a secure password
+  username             = var.db_username
+  password             = var.db_password
+  db_name  = var.db_name
   publicly_accessible  = false
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
-  db_subnet_group_name = var.db_subnet_group_name # Replace with your DB subnet group name
+  db_subnet_group_name = aws_db_subnet_group.rds_subnet_group.name # Replace with your DB subnet group name
   skip_final_snapshot  = true
 
   tags = {
