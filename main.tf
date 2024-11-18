@@ -157,12 +157,15 @@ resource "aws_instance" "web" {
               cp /tmp/aws/tomcat9sstudent/student.war /opt/tomcat/webapps/
               cp /tmp/aws/tomcat9sstudent/mysql-connector.jar /opt/tomcat/lib/
 
-              # Configure database connection (environment variables for database details)
-              echo "DB_HOST=${aws_db_instance.mariadb.endpoint}" >> /etc/environment
-              echo "DB_USER=admin" >> /etc/environment
-              echo "DB_PASS=yoursecurepassword" >> /etc/environment
-              echo "DB_NAME=studentdb" >> /etc/environment
-              source /etc/environment
+               # Configure the database connection
+              cat <<EOL > /opt/tomcat/conf/context.xml
+              <Context>
+                  <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
+                            maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+                            username="${var.db_username}" password="${var.db_password}" driverClassName="com.mysql.jdbc.Driver"
+                            url="jdbc:mysql://${aws_db_instance.mariadb.endpoint}/${var.db_name}"/>
+              </Context>
+              EOL
 
               # Start Tomcat using catalina.sh
               /opt/tomcat/bin/catalina.sh stop
