@@ -49,12 +49,6 @@ variable "instance_count" {
   default     = 1
 }
 
-variable "availability_zone" {
-  description = "Availability zone to launch the instance"
-  type        = string
-  default     = "default"
-}
-
 variable "this_aws_instance_volume_size" {
   description = "this_aws_instance_volume_size for instance"
   type        = number

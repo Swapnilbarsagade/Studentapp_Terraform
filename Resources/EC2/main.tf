@@ -59,7 +59,6 @@ resource "aws_instance" "web" {
   associate_public_ip_address = var.associate_public_ip_address
   #count                       = var.instance_count
   vpc_security_group_ids = [aws_security_group.this_student_sg.id]
-  #availability_zone      = var.availability_zone
   root_block_device {
     volume_size = var.this_aws_instance_volume_size
   }

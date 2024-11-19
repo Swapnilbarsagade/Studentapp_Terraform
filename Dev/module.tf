@@ -20,7 +20,6 @@ module "ec2" {
   instance_type   = "t2.micro"
   key_name        = "batmobile"
   associate_public_ip_address = true
-  availability_zone = "default"
   this_aws_instance_volume_size  = 10
   instance_name   = "web-server"
   sg_name         = "web-server-sg"
