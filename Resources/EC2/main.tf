@@ -95,15 +95,7 @@ resource "aws_instance" "web" {
               cp /tmp/aws/tomcat9sstudent/student.war /opt/tomcat/webapps/
               cp /tmp/aws/tomcat9sstudent/mysql-connector.jar /opt/tomcat/lib/
 
-               # Configure the database connection
-              cat <<EOL > /opt/tomcat/conf/context.xml
-              <Context>
-                  <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
-                            maxTotal="100" maxIdle="30" maxWaitMillis="10000"
-                            username="${db_username}" password="${db_password}" driverClassName="com.mysql.jdbc.Driver"
-                            url="jdbc:mysql://${rds_endpoint}/${db_name}"/>
-              </Context>
-              EOL
+              
 
               # Start Tomcat using catalina.sh
               /opt/tomcat/bin/catalina.sh stop

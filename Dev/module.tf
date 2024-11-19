@@ -24,19 +24,5 @@ module "ec2" {
   instance_name   = "web-server"
   sg_name         = "web-server-sg"
   allowed_ssh_cidrs = ["203.0.113.0/24"] # Restrict to your IP range
-  rds_endpoint     = module.rds.rds_endpoint
-  db_username = module.rds.db_username
-  db_password = module.rds.db_password
-  db_name = module.rds.db_name
 }
 
-module "rds" {
-  source          = "/home/cloudshell-user/Studentapp_Terraform/Resources/RDS"
-  vpc_id          = module.vpc.vpc_id
-  subnet_id       = module.vpc.private_subnet_id
-  sg_name         = "database-sg"
-  db_username     = "admin"
-  db_password     = "admin123"
-  db_name         = "studentdb"
-
-}
