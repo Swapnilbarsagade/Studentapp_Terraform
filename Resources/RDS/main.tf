@@ -32,7 +32,7 @@ resource "aws_security_group" "rds_sg" {
 # DB Subnet Group
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name       = "rds-subnet-group"
-  subnet_ids = var.subnet_id  # Replace with your subnet IDs
+  subnet_id = var.subnet_id  # Replace with your subnet IDs
 
   tags = {
     Name = "rds-subnet-group"

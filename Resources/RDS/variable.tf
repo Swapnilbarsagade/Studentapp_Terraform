@@ -4,6 +4,11 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "subnet_id" {
+  description = "The ID of the subnet where the EC2 instance will be launched"
+  type        = string
+}
+
 variable "sg_name" {
   description = "Name for the security group"
   type        = string

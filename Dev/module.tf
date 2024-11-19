@@ -30,4 +30,9 @@ module "rds" {
   source          = "/home/cloudshell-user/Studentapp_Terraform/Resources/RDS"
   vpc_id          = module.vpc.vpc_id
   subnet_id       = module.vpc.private_subnet_id
+  sg_name         = "database-sg"
+  db_username     = "admin"
+  db_password     = "admin123"
+  db_name         = "studentdb"
+
 }
