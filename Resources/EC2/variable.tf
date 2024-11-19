@@ -8,7 +8,7 @@ variable "vpc_id" {
 variable "sg_name" {
   description = "Name for the security group"
   type        = string
-  default     = "ec2-security-group"
+  default     = "student-security-group"
 }
 
 variable "allowed_ssh_cidrs" {

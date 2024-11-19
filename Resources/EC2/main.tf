@@ -1,5 +1,5 @@
 resource "aws_security_group" "this_student_sg" {
-  name        = "student-security-group"
+  name        = var.sg_name
   description = "Security group for my StudentApp"
   vpc_id      = var.vpc_id  # replace with your VPC ID
 
@@ -46,7 +46,7 @@ resource "aws_security_group" "this_student_sg" {
   }
 
   tags = {
-    Name = "student-sg"
+    Name = var.sg_name
   }
 }
 
@@ -55,6 +55,7 @@ resource "aws_instance" "web" {
   ami           = var.this_ami
   instance_type = var.instance_type
   key_name      = var.key_name
+  subnet_id     = var.subnet_id
   associate_public_ip_address = var.associate_public_ip_address
   #count                       = var.instance_count
   vpc_security_group_ids = [aws_security_group.this_student_sg.id]
