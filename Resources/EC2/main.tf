@@ -100,8 +100,8 @@ resource "aws_instance" "web" {
               <Context>
                   <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
                             maxTotal="100" maxIdle="30" maxWaitMillis="10000"
-                            username="${var.db_username}" password="${var.db_password}" driverClassName="com.mysql.jdbc.Driver"
-                            url="jdbc:mysql://${var.rds_endpoint}/${var.db_name}"/>
+                            username="${db_username}" password="${db_password}" driverClassName="com.mysql.jdbc.Driver"
+                            url="jdbc:mysql://${rds_endpoint}/${db_name}"/>
               </Context>
               EOL
 
