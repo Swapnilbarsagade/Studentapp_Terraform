@@ -19,6 +19,12 @@ variable "allowed_ssh_cidrs" {
 
 # EC2 variables for studentapp: 
 
+variable "instance_name" {
+  description = "Type of the instance to launch"
+  type        = string
+  default     = "web-server"
+}
+
 variable "this_ami" {
   description = "Type of the instance to launch"
   type        = string
