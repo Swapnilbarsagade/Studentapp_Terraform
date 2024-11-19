@@ -24,6 +24,7 @@ module "ec2" {
   instance_name   = "web-server"
   sg_name         = "web-server-sg"
   allowed_ssh_cidrs = ["203.0.113.0/24"] # Restrict to your IP range
+  rds_endpoint     = module.rds.rds_endpoint
 }
 
 module "rds" {
