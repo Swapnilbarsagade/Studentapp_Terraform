@@ -16,8 +16,12 @@ module "ec2" {
   source          = "/home/cloudshell-user/Terraform/ModuleBlock/Resources/EC2"
   vpc_id          = module.vpc.vpc_id
   subnet_id       = module.vpc.public_subnet_id
-  ami_id          = "ami-0de20b1c8590e09c5" # Replace with a valid AMI ID
+  ami_id          = "ami-042e76978adeb8c48" # Replace with a valid AMI ID
   instance_type   = "t2.micro"
+  key_name        = "batmobile"
+  associate_public_ip_address = true
+  availability_zone = "default"
+  this_aws_instance_volume_size  = 10
   instance_name   = "web-server"
   sg_name         = "web-server-sg"
   allowed_ssh_cidrs = ["203.0.113.0/24"] # Restrict to your IP range
