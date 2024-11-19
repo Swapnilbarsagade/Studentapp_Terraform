@@ -29,15 +29,6 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
-# DB Subnet Group
-resource "aws_db_subnet_group" "rds_subnet_group" {
-  name       = "rds-subnet-group"
-  subnet_id = var.subnet_id  # Replace with your subnet IDs
-
-  tags = {
-    Name = "rds-subnet-group"
-  }
-}
 
 # RDS MariaDB instance
 resource "aws_db_instance" "mariadb" {
@@ -49,6 +40,7 @@ resource "aws_db_instance" "mariadb" {
   password             = var.db_password
   db_name  = var.db_name
   publicly_accessible  = false
+  subnet_id            = var.subnet_id
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   db_subnet_group_name = aws_db_subnet_group.rds_subnet_group.name # Replace with your DB subnet group name
   skip_final_snapshot  = true
