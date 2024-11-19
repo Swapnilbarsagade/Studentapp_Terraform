@@ -1,4 +1,4 @@
-mysql -h terraform-20241118080823058900000002.c3oio00w0vw7.ap-northeast-2.rds.amazonaws.com -u admin -padmin123
+mysql -h terraform-20241119121149361500000002.c3oio00w0vw7.ap-northeast-2.rds.amazonaws.com -u admin -padmin123
 
 sudo /opt/tomcat/bin/catalina.sh stop
 
