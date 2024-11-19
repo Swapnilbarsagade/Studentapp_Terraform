@@ -65,3 +65,25 @@ variable "subnet_id" {
   description = "The ID of the subnet where the EC2 instance will be launched"
   type        = string
 }
+
+# RDS variables 
+
+variable "rds_endpoint" {
+  description = "The endpoint of the RDS database"
+  type        = string
+}
+
+variable "db_username" {
+  description = "The username for the RDS database"
+  type        = string
+}
+
+variable "db_password" {
+  description = "The password for the RDS database"
+  type        = string
+}
+
+variable "db_name" {
+  description = "The database name for the RDS instance"
+  type        = string
+}
