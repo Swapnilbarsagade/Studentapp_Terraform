@@ -25,3 +25,9 @@ module "ec2" {
   sg_name         = "web-server-sg"
   allowed_ssh_cidrs = ["203.0.113.0/24"] # Restrict to your IP range
 }
+
+module "rds" {
+  source          = "/home/cloudshell-user/Studentapp_Terraform/Resources/RDS"
+  vpc_id          = module.vpc.vpc_id
+  subnet_id       = module.vpc.private_subnet_id
+}
