@@ -15,7 +15,7 @@ module "vpc" {
 module "ec2" {
   source          = "/home/cloudshell-user/Studentapp_Terraform/Resources/EC2"
   vpc_id          = module.vpc.vpc_id
-  subnet_ids       = module.vpc.public_subnet_id
+  subnet_ids       = [module.vpc.public_subnet_id]
   this_ami          = "ami-042e76978adeb8c48" # Replace with a valid AMI ID
   instance_type   = "t2.micro"
   key_name        = "batmobile"
