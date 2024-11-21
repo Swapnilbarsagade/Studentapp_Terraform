@@ -55,7 +55,7 @@ resource "aws_instance" "web" {
   ami           = var.this_ami
   instance_type = var.instance_type
   key_name      = var.key_name
-  subnet_id     = var.subnet_id
+  subnet_id     = var.subnet_ids[0]
   associate_public_ip_address = var.associate_public_ip_address
   #count                       = var.instance_count
   vpc_security_group_ids = [aws_security_group.this_student_sg.id]
