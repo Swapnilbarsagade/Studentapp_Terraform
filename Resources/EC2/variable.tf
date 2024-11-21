@@ -74,3 +74,8 @@ variable "subnet_ids" {
   type        = list(string)
   default = ["subnet-07d50e514206d0408", "subnet-0cb026ebf3a0bf22e", "subnet-0a7d16e970a6d7b9f", "subnet-0c695957469386d8e"]
 }
+
+# In ec2 module's variables.tf
+variable "certificate_arn" {
+  type = string
+}
