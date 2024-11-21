@@ -30,4 +30,5 @@ module "route53" {
   source          = "/home/cloudshell-user/Studentapp_Terraform/Resources/Route53"
   domain_name     = "swapnilbdevops.online"
   subdomain       = "student"
+  alb_dns_name    = module.ec2.alb_dns_name   #aws_lb.student_alb.dns_name
 }

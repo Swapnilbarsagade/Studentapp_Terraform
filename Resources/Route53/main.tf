@@ -40,5 +40,5 @@ resource "aws_route53_record" "student_dns_record" {
   name    = var.subdomain
   type    = "CNAME"
   ttl     = 300
-  records = [aws_lb.student_alb.dns_name]
+  records = [var.alb_dns_name]
 }

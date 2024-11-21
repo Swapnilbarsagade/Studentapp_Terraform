@@ -9,3 +9,7 @@ variable "subdomain" {
   type        = string
   default     = "student"  # Example subdomain (e.g., 'todo.example.com')
 }
+
+variable "alb_dns_name" {
+  type = string
+}
