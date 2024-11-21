@@ -12,3 +12,9 @@ output "security_group_id" {
   value       = aws_security_group.this_student_sg.id
   description = "The ID of the security group for the EC2 instance"
 }
+
+# Output for the Application Load Balancer (ALB) DNS name
+output "alb_dns_name" {
+  description = "DNS name of the Application Load Balancer"
+  value       = aws_lb.student_alb.dns_name
+}
