@@ -113,7 +113,7 @@ resource "aws_lb" "student_alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.this_student_sg.id]
-  subnet            = var.subnet_id  # Replace with your subnet IDs
+  subnets            = var.subnet_ids  # Replace with your subnet IDs
 
   enable_deletion_protection = false
   enable_cross_zone_load_balancing = true
