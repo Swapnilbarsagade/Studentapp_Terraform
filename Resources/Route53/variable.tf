@@ -7,5 +7,5 @@ variable "domain_name" {
 variable "subdomain" {
   description = "Subdomain for the carvcilla app"
   type        = string
-  default     = "student.swapnilbdevops.online"  # Example subdomain (e.g., 'todo.example.com')
+  default     = "student"  # Example subdomain (e.g., 'todo.example.com')
 }

@@ -28,5 +28,6 @@ module "ec2" {
 
 module "route53" {
   source          = "/home/cloudshell-user/Studentapp_Terraform/Resources/route53"
-  
+  domain_name     = "swapnilbdevops.online"
+  subdomain       = "student"
 }
